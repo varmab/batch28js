@@ -1,250 +1,508 @@
 <html>
-    <head>
-        <title>Welcome to JS</title>
-        <script>
-            
-            //Starting JS class
-            var myName="Varma";
-            var age=46;
-            var isStudent=false;
 
-            console.log("Welcome to " + myName)
-            
-            age="Fourty six";
+<head>
+    <title>Welcome to JS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
 
+        //Starting JS class
+        var myName = "Varma";
+        var age = 46;
+        var isStudent = false;
 
-            var x;
+        console.log("Welcome to " + myName)
 
-            age=null;
-
-            /*
-                This is
-                multile line
-                comment
-            */
-
-            
-            var student={
-                name:"Varma",
-                age:46,
-                isStudent:false,
-                "college name":"JNTU",
-                1:"one"
-            }
-
-            var myKey="age";
+        age = "Fourty six";
 
 
-            var color="red";
+        var x;
 
-            if(color=="red"){
+        age = null;
+
+        /*
+            This is
+            multile line
+            comment
+        */
+
+
+        var student = {
+            name: "Varma",
+            age: 46,
+            isStudent: false,
+            "college name": "JNTU",
+            1: "one"
+        }
+
+        var myKey = "age";
+
+
+        var color = "red";
+
+        if (color == "red") {
+            console.log("Color is red");
+        }
+        else if (color == "green") {
+            console.log("Color is green")
+        }
+        else if (color == "black") {
+            console.log("Color is blac")
+        }
+        else {
+            console.log("Color is unknown")
+        }
+
+        var a = 2;
+
+        if (a) {
+
+        }
+        else {
+
+        }
+
+        //ternary expression
+        (color == "red") ? console.log("red") : console.log("Unknown")
+
+        //switch
+        switch (color) {
+            case "red":
                 console.log("Color is red");
-            }
-            else if(color=="green"){
-                console.log("Color is green")
-            }
-            else if(color=="black"){
-                console.log("Color is blac")
-            }
-            else {
+                break;
+            case "black":
+                console.log("Color is black");
+                break;
+            default:
                 console.log("Color is unknown")
-            }
+        }
 
-            var a=2;
+        //Loops
+        //while
 
-            if(a){
+        var a = 0;
+        while (a <= 10) {
+            console.log(a);
+            if (a > 5) break;
+            a++;
+        }
 
-            }
-            else
+        var b = 0;
+        do {
+            console.log(b);
+            b++;
+        } while (b <= 10)
+
+        for (var c = 0; c <= 10; c++) {
+            console.log(c);
+        }
+
+        //break
+        //continue
+
+        console.log(add(1, 2));
+
+        //JavaScript Hoisting
+
+        //function declaration
+        function add(a, b) {
+            return a + b;
+        }
+
+        //function expression
+        var sum = function (a, b) {
+            return a + b;
+        }
+
+        console.log(sum(2, 3));
+
+
+
+        var myNumbers = ["one", "two", "three"];
+        myNumbers.push("four");
+        myNumbers.unshift("zero");
+        myNumbers.pop();
+        myNumbers.shift();
+
+        var myLetters = ["a", "b", "c"];
+
+        myLetters.forEach(function (value) {
+            console.log(value)
+        })
+
+        var movies = [
             {
-
+                id: 1,
+                title: "Bahubali",
+                actor: "Prabhas",
+                revenue: 300,
+                theaters: ["A", "B"]
+            },
+            {
+                id: 2,
+                title: "Adhurs",
+                actor: "NTR",
+                revenue: 50,
+                theaters: ["B", "C"]
+            },
+            {
+                id: 3,
+                title: "Kushi",
+                actor: "Pavan",
+                revenue: 15,
+                theaters: ["C", "D"]
             }
+        ]
 
-            //ternary expression
-            (color=="red") ? console.log("red") : console.log("Unknown")
+        //every, some, filter, map, reduce
 
-            //switch
-            switch(color){
-                case "red":
-                    console.log("Color is red");
-                    break;
-                case "black":
-                    console.log("Color is black");
-                    break;
-                default:
-                    console.log("Color is unknown")
+        //1. Is any movie crossed 100cr revenue?
+        var isAny100 = movies.some(function (movie) {
+            return movie.revenue >= 100;
+        })
+
+        console.log(isAny100);
+
+        //2. Is all movies crossed 10cr revenue?
+        var isAll10 = movies.every(function (movie) {
+            return movie.revenue >= 10;
+        })
+
+        console.log(isAll10);
+
+        //3. I want to get list of movies released in theater B
+        var bMovies = movies.filter(function (movie) {
+            return movie.theaters.indexOf("B") != -1;
+        })
+
+        console.log(bMovies)
+
+        //4: I want to get list of titles of all movies
+        // ["Bahubali","Adhurs","Kushi"]
+
+        var titles = movies.map(function (movie) {
+            return movie.title;
+        })
+
+        console.log(titles);
+
+        //5. I want total revenue of all movies
+
+        var totalRevenue = movies.reduce(function (total, movie) {
+            return total + movie.revenue;
+        }, 0)
+
+        console.log(totalRevenue);
+
+        //6. I want list of actors of all movies
+        // "Prabhas,NTR,Pavan"
+
+        var actors = movies.reduce(function (actors, movie) {
+            if (actors == "") return movie.actor;
+            return actors + "," + movie.actor;
+        }, '')
+
+        console.log(actors);
+
+        //7. I want an object containing movie name as key
+        // and actor as value for all movies
+
+        /*
+            {
+                "Bahubali":"Prabas",
+                "Adhurs":"NTR",
+                "Kushi":"Pavan"
             }
+        */
 
-            //Loops
-            //while
+        var titleActors = movies.reduce(function (titleActors, movie) {
+            titleActors[movie.title] = movie.actor;
+            return titleActors;
+        }, {})
 
-            var a=0;
-            while(a<=10){
-                console.log(a);
-                if(a>5) break;
-                a++;
-            }
+        console.log(titleActors)
 
-            var b=0;
-            do {
-                console.log(b);
-                b++;
-            } while(b<=10)
+        //8. I want list of theaters of all movies without any duplicates
+        // ["A","B","C","D"]
 
-            for(var c=0;c<=10;c++){
-                console.log(c);
-            }
-
-            //break
-            //continue
-
-            console.log(add(1,2));
-
-            //JavaScript Hoisting
-
-            //function declaration
-            function add(a,b){
-                return a+b;
-            }
-        
-            //function expression
-            var sum=function(a,b){
-                return a+b;
-            }
-
-            console.log(sum(2,3));
-
-        
-
-            var myNumbers=["one","two","three"];
-            myNumbers.push("four");
-            myNumbers.unshift("zero");
-            myNumbers.pop();
-            myNumbers.shift();
-
-            var myLetters=["a","b","c"];
-
-            myLetters.forEach(function(value){
-                console.log(value)
-            })
-
-            var movies=[
-                {
-                    id:1,
-                    title:"Bahubali",
-                    actor:"Prabhas",
-                    revenue:300,
-                    theaters:["A","B"]
-                },
-                {
-                    id:2,
-                    title:"Adhurs",
-                    actor:"NTR",
-                    revenue:50,
-                    theaters:["B","C"]
-                },
-                {
-                    id:3,
-                    title:"Kushi",
-                    actor:"Pavan",
-                    revenue:15,
-                    theaters:["C","D"]
+        var allTheaters = movies.reduce(function (theaters, movie) {
+            movie.theaters.forEach(function (theater) {
+                if (theaters.includes(theater) == false) {
+                    theaters.push(theater);
                 }
-            ]
-
-            //every, some, filter, map, reduce
-
-            //1. Is any movie crossed 100cr revenue?
-            var isAny100=movies.some(function(movie){
-                return movie.revenue>=100;
             })
+            return theaters;
+        }, [])
 
-            console.log(isAny100);
+        console.log(allTheaters)
 
-            //2. Is all movies crossed 10cr revenue?
-            var isAll10=movies.every(function(movie){
-                return movie.revenue>=10;
-            })
+        var a = [1, 2, 3];
+        var b = [4, 5, 6];
+        var c = a.concat(b);
 
-            console.log(isAll10);
+        var aReverse = a.reverse();
 
-            //3. I want to get list of movies released in theater B
-            var bMovies=movies.filter(function(movie){
-                return movie.theaters.indexOf("B")!=-1;
-            })
+        movies.sort((a, b) => {
+            if (a.revenue > b.revenue) return 1;
+            if (a.revenue < b.revenue) return -1;
+            return 0;
+        })
 
-            console.log(bMovies)
+        var person = {
+            gender: "Male"
+        }
 
-            //4: I want to get list of titles of all movies
-            // ["Bahubali","Adhurs","Kushi"]
+        var user = {
+            name: "Varma",
+            age: 45,
+            address: {
+                street: "MIG 27/1",
+                city: "Hyderabad"
+            }
+        }
 
-            var titles=movies.map(function(movie){
-                return movie.title;
-            })
 
-            console.log(titles);
 
-            //5. I want total revenue of all movies
-
-            var totalRevenue=movies.reduce(function(total,movie){
-                return total + movie.revenue;
-            },0)
-
-            console.log(totalRevenue);
-
-            //6. I want list of actors of all movies
-            // "Prabhas,NTR,Pavan"
-
-            var actors=movies.reduce(function(actors,movie){
-                if(actors=="") return movie.actor;
-                return actors + "," + movie.actor;
-            },'')
-
-            console.log(actors);
-
-            //7. I want an object containing movie name as key
-            // and actor as value for all movies
-
-            /*
-                {
-                    "Bahubali":"Prabas",
-                    "Adhurs":"NTR",
-                    "Kushi":"Pavan"
-                }
-            */
-
-            var titleActors=movies.reduce(function(titleActors,movie){
-                titleActors[movie.title]=movie.actor;
-                return titleActors;
-            },{})
-            
-            console.log(titleActors)
-
-            //8. I want list of theaters of all movies without any duplicates
-            // ["A","B","C","D"]
-
-            var allTheaters=movies.reduce(function(theaters,movie){
-                movie.theaters.forEach(function(theater){
-                    if(theaters.indexOf(theater)==-1){
-                        theaters.push(theater);
-                    }
-                })
-                return theaters;
-            },[])
-
-            console.log(allTheaters)
-
-            
+        var student = Object.assign({}, user, person);
 
 
 
 
+    </script>
+    <script src="index.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+        .green{
+            color:green
+        }
+    </style>
+</head>
 
+<body>
+    <h1>Welcome to JS class</h1>
+    <p>Happy Newyear <b>2020</b></p>
+    <a href="http://yahoo.com">Yahoo!!!</a>
+    <button>Say Hello</button>
 
-        </script>
-        <script src="index.js"></script>
-    </head>
-    <body>
-        <h1>Welcome to JS class from Coding Sastra</h1>
-    </body>
+    <div>Div 1</div>
+<div class="highlight">Div 2</div>
+<div id="third">Div 3</div>
+<div class="highlight">Div 4</div>
+</body>
+
 </html>
+<script>
+//     var h1 = document.querySelector("h1");
+//     //h1.style.color = "red";
+
+//    // h1.classList.remove("red");
+//    // h1.classList.add("green");
+
+//    // h1.textContent="Thank you for coming"
+
+//     var p=document.querySelector("p");
+//     p.innerHTML="Same to you Happy New Year <b>2020</b>"
+
+//     var a=document.querySelector("a");
+//     a.setAttribute("href","http://google.com");
+//     a.textContent="Google";
+
+//     var button=document.querySelector("button");
+//     button.addEventListener("click",function(){
+//         alert("Hello")
+//     })
+
+//     h1.addEventListener("mouseover",function(){
+//         h1.textContent="Thank you for coming"
+//     })
+
+//     h1.addEventListener("mouseout",function(){
+//         h1.textContent="Welcome to JS class"
+//     })
+</script>
+<script>
+    $("h1").css("color","red");
+    $("div").css("background-color","purple");
+    $(".highlight").css("width","200px")
+    $("#third").css("border","1px solid orange");
+    $("div:first").css("color","pink");
+
+    $("button").on("click",function(){
+       $.ajax({
+           url:'http://jsonplaceholder.typicode.com/posts/1',
+           success:function(data){
+               $("p").text(data.title);
+           },
+           error:function(Err){
+               console.log(Err)
+           }
+       })
+    })
+</script>
+<script>
+    // localStorage.setItem("userName","varmab");
+    // var previousUser=localStorage.getItem("userName");
+    // localStorage.removeItem("userName")
+    // localStorage.clear();
+
+    // sessionStorage
+</script>
+
+<script>
+    //Object Oriented Programming
+
+    //class - blueprint
+        //properties
+        //methods
+        //constructor
+
+    //Constructor function
+    // function Person(name,age){
+    //     this.name=name;
+    //     this.age=age;
+    // }
+
+    // Person.prototype.showName=function(){
+    //     console.log(this.name)
+    // }
+
+    class Person{
+        constructor(name,age){
+            this.name=name;
+            this.age=age;
+        }
+
+        showName(){
+            console.log(this.name)
+        }
+    }
+    
+    //object - instance of class
+    var varma=new Person("Varma",46)
+    varma.showName();
+
+    // function Student(name,age,school){
+    //     this.name=name;
+    //     this.age=age;
+    //     this.school=school
+    // }
+
+    // Student.prototype=new Person();
+
+    // Student.prototype.showSchool=function(){
+    //     console.log(this.school)
+    // }
+
+    class Student extends Person{
+        constructor(name,age,school){
+            super(name,age);
+            this.school=school;
+        }
+
+        showSchool(){
+            console.log(this.school)
+        }
+    }
+
+    var ram=new Student("Ram",24,"JNTU");
+    ram.showSchool();
+    ram.showName()
+
+    //Encapsulation
+    //Inheritance
+    //Polymorphism
+    //Abstraction
+</script>
+
+<script>
+
+var a=10;
+
+if(true){
+    let a=20;
+    console.log(a); //20
+}
+
+console.log(a); //10
+
+const PI=3.1415;
+
+var teacher={
+    name:'Varma',
+    age:46
+}
+
+
+
+
+var firstName="Varma"
+var lastName="Bhupatiraju"
+var address="MIG 27/1, Road #5"
+var area="KPHB"
+var city="Hyderabad"
+var state="TS"
+var postalCode=500072
+
+var shippingLabel=firstName + " " + lastName + "\n"
++ address + "\n"
++ area + "," + city + "\n"
++ state + " " + postalCode;
+
+console.log(shippingLabel)
+
+
+var newShippingLabel=`
+${firstName} ${lastName}
+${address}
+${area}, ${city}
+${state} ${postalCode}
+`
+
+console.log(newShippingLabel)
+
+var add=(...numbers)=>{
+    return numbers.reduce((total,n)=>{
+        return total+n;
+    })
+}
+
+var a=[1,2,3]
+var b=[4,5,6]
+
+var c=[...a,4];
+
+var user={
+    name:"Varma",
+    age:46
+}
+
+var student={
+    college:"JNTU"
+}
+
+var teacher={
+    ...user,
+    ...student,
+    subject:"JS"
+}
+
+var family=["Varma","Neelima","Suma","Mother","Father","Mother-in-law","Father-in-law"];
+
+// var me=family[0]
+// var wife=family[1]
+// var daughter=family[2]
+
+var [me,,daughter,...others]=family;
+console.log(others)
+
+// var name=user.name;
+// var age=user.age;
+
+var { name, age}=user;
+
+var total=(a,b)=>{
+    return a+b;
+}
+
+</script>
